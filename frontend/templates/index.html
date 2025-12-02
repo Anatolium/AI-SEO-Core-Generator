@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Разработка SEO-ядра</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;400&display=swap" rel="stylesheet">
+    <script src="/static/main.js"></script>
+    <style>
+        body {
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #7f7fd5 0%, #86a8e7 50%, #91eac9 100%);
+            font-family: 'Montserrat', Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: rgba(255,255,255,0.15);
+            box-shadow: 0 8px 32px 0 rgba(31,38,135,0.2);
+            border-radius: 24px;
+            padding: 20px 32px 20px 32px;
+            width: 600px;
+            max-width: 95vw;
+            text-align: center;
+            backdrop-filter: blur(6px);
+            /* === Адаптивная высота === */
+            min-height: 90vh;   /* занимает ~90% высоты экрана */
+            display: flex;
+            flex-direction: column;
+
+            /* === ИЗМЕНЕНИЕ 1: УДАЛЯЕМ space-between, ВВОДИМ общий GAP === */
+            justify-content: flex-start; /* Убираем натяжение */
+            gap: 20px; /* Устанавливает одинаковый отступ между .top-and-middle-content и #result */
+        }
+        .container h1 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin-bottom: 0.1em;
+            color: #fff;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        .container h1 svg {
+            width: 1.6em;
+            height: 1.6em;
+            vertical-align: middle;
+        }
+        .container p {
+            color: #e0e0e0;
+            font-size: 0.9em;
+            margin-bottom: 1.2em;
+        }
+
+        /* НОВЫЙ БЛОК: Обертка для верхнего и среднего контента */
+        .top-and-middle-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* Контролирует отступ (20px) между ВЕРХОМ и СЕРЕДИНОЙ */
+            flex-grow: 1; /* Позволяет этому блоку растягиваться */
+
+            /* === ИЗМЕНЕНИЕ 2: УДАЛЯЕМ margin-bottom === */
+            /* margin-bottom: 40px; */
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* margin-bottom удален, теперь используется gap в .top-and-middle-content */
+        }
+
+        .form-row {
+            display: flex;
+            align-items: center;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            padding: 6px 8px 6px 0;
+        }
+        .form-row svg {
+            margin: 0 12px;
+            color: #7f7fd5;
+            width: 1.6em;
+            height: 1.6em;
+        }
+        input[type=url] {
+            border: none;
+            outline: none;
+            font-size: 1.1em;
+            flex: 1;
+            padding: 12px 8px;
+            background: transparent;
+            font-family: inherit;
+        }
+        button {
+            background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 0 28px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            height: 44px;
+            margin-left: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 8px rgba(67,233,123,0.08);
+            transition: background 0.2s, transform 0.1s;
+        }
+        button:hover {
+            background: linear-gradient(90deg, #38f9d7 0%, #43e97b 100%);
+            transform: translateY(-2px) scale(1.03);
+        }
+        #log, #result {
+            text-align: left;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 520px;
+        }
+        #log {
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+            padding: 14px;
+
+            flex-grow: 1;        /* Занимает всё свободное место внутри .top-and-middle-content */
+            max-height: 60vh;    /* Ограничивает рост и включает прокрутку */
+            overflow-y: auto;    /* Включает прокрутку */
+
+            min-height: 60px;
+            color: #333;
+            font-size: 1em;
+            white-space: pre-line;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+        #result {
+            background: #e0ffe0;
+            border-radius: 10px;
+            padding: 14px;
+            min-height: 40px;
+            color: #1a4d2e;
+            font-size: 1.08em;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="top-and-middle-content">
+            <div class="header-content">
+                <h1>
+                    <svg fill="none" viewBox="0 0 32 32"><path fill="#fff" d="M16 2a14 14 0 1 0 0 28A14 14 0 0 0 16 2Zm0 26A12 12 0 1 1 16 4a12 12 0 0 1 0 24Zm1-17h-2v7h7v-2h-5V11Zm-1 13a10 10 0 1 1 0-20 10 10 0 0 1 0 20Z"/></svg>
+                    Разработка SEO-ядра
+                </h1>
+                <p>Генерация SEO-ядра по ссылке с помощью ИИ</p>
+                <form id="seo-form" autocomplete="off">
+                    <div class="form-row">
+                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M17 7a5 5 0 0 0-7.07 0l-5.66 5.66a5 5 0 0 0 7.07 7.07l1.06-1.06a1 1 0 1 0-1.42-1.42l-1.06 1.06a3 3 0 1 1-4.24-4.24l5.66-5.66a3 3 0 1 1 4.24 4.24l-1.06 1.06a1 1 0 1 0 1.42 1.42l1.06-1.06A5 5 0 0 0 17 7Z"/></svg>
+                        <input type="url" id="url" placeholder="Введите ссылку на сайт" required />
+                        <button type="submit">
+                            <svg fill="none" viewBox="0 0 24 24" width="22" height="22"><path fill="#fff" d="M12 2a1 1 0 0 1 1 1v8h8a1 1 0 1 1 0 2h-8v8a1 1 0 1 1-2 0v-8H3a1 1 0 1 1 0-2h8V3a1 1 0 0 1 1-1Z"/></svg>
+                            Анализировать
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div id="log"></div>
+        </div>
+        <div id="result"></div>
+    </div>
+</body>
+</html>
